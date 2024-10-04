@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.UserInfo;
 import com.example.demo.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,8 +33,12 @@ public class TestController {
         return new ResponseEntity<>("Hello World By Put Method",HttpStatus.OK);
     }
 
+    @PutMapping("/info")
+    ResponseEntity<?> putHelloWorld(@RequestBody UserInfo userInfoDto){
+        return new ResponseEntity<>(testService.myInfo(userInfoDto),HttpStatus.OK);
+    }
     @DeleteMapping("/name")
-    ResponseEntity<?> deleteHelloWorld(){
-        return new ResponseEntity<>("Hello World By Delete Method",HttpStatus.OK);
+    ResponseEntity<?> deleteHelloWorld(@RequestHeader(name="address") String address, @RequestBody UserInfo userInfoDto){
+        return new ResponseEntity<>(testService.myInfoWithaddress(address, userInfoDto),HttpStatus.OK);
     }
 }

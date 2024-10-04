@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.UserInfo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,5 +28,14 @@ public class TestService {
         } else {
             return "role param is null";
         }
+    }
+
+    public String myInfo(UserInfo userInfoDto){
+        userInfoDto.setName("test");
+        return myName("name : " + userInfoDto.getName()) + "\nage : " + myAge(userInfoDto.getAge()) + "\nrole : " + myRole(userInfoDto.getRole());
+    }
+
+    public String myInfoWithaddress(String address, UserInfo userInfoDto){
+        return myInfo(userInfoDto) + "\naddress : " + address;
     }
 }
